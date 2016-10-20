@@ -28,6 +28,7 @@
 	<modules>
 		<module>cc-task</module>
 		<module>cc-tool</module>
+		<module>cc-orm</module>
 	</modules>
 
 	<dependencies>
