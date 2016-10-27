@@ -6,5 +6,12 @@
 		<artifactId>cc</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>com.cc</groupId>
+			<artifactId>cc-tool</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 	<artifactId>cc-task</artifactId>
 </project>
