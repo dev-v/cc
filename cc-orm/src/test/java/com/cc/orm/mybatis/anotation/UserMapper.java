@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.jdbc.SQL;
 
+import com.cc.orm.mybatis.mapper.BaseSql;
+
 /**
  * @author wenlongchen
  * @since Jun 22, 2016
@@ -56,7 +58,7 @@ public interface UserMapper {
        *  支持下划线和点分割
        * </pre>
        */
-      super("SL$ACTOR","id,abc_name,tttAddress");
+      super("user","id,abc_name,tttAddress");
       
       // 非规范的数据库字段命名 需手动映射为java属性 mapper只适用于查询列表
       mapper("abc_name", "name");

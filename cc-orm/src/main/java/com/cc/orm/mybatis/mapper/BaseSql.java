@@ -1,4 +1,4 @@
-package com.cc.orm.mybatis.anotation;
+package com.cc.orm.mybatis.mapper;
 
 import java.io.Serializable;
 import java.util.Collection;
