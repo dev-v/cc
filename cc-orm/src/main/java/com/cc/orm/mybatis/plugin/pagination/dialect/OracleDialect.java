@@ -1,12 +1,14 @@
 package com.cc.orm.mybatis.plugin.pagination.dialect;
 
-import com.cc.orm.mybatis.plugin.pagination.Page;
+import com.cc.orm.mybatis.plugin.pagination.page.Page;
 
 /**
  * @author wenlongchen
  * @since Nov 4, 2016
  */
 public class OracleDialect extends AbstractDialect {
+  
+  @SuppressWarnings("rawtypes")
   @Override
   public String getPageSql(String originalSql, Page page) {
     long offset = (page.getCurrentPage() - 1) * page.getPageSize();
@@ -18,6 +20,7 @@ public class OracleDialect extends AbstractDialect {
     return sql;
   }
 
+  @SuppressWarnings("rawtypes")
   private String genenrateOrderBy(Page page) {
     if (page.getSort() != null) {
       return " order by " + page.getSort();

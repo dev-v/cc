@@ -205,7 +205,7 @@ public class Util {
       }
       br.close();
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
     }
     return sb.toString();
   }
@@ -277,12 +277,12 @@ public class Util {
         sb.append(str);
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
     }finally{
       try {
         if(br!=null)br.close();
       } catch (IOException e) {
-        e.printStackTrace();
+        logger.error(e);
       }
     }
     return sb==null?IConstant.blank_:sb.toString();

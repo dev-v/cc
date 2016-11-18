@@ -29,6 +29,7 @@
 		<module>cc-task</module>
 		<module>cc-tool</module>
 		<module>cc-orm</module>
+		<module>cc-lucene</module>
 	</modules>
 
 	<dependencies>
@@ -41,52 +42,37 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
+			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.20</version>
+		</dependency>
+
 	</dependencies>
 
 	<repositories>
 		<repository>
-			<id>public</id>
-			<name>public</name>
-			<url>http://repository.sonatype.org/content/groups/public/</url>
+			<id>maven2</id>
+			<name>maven2</name>
+			<url>http://repo1.maven.org/maven2</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
 			<snapshots>
-				<enabled>true</enabled>
+				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 		<repository>
-			<id>acegisecurity</id>
-			<name>acegisecurity</name>
-			<url>http://mirrors.ibiblio.org/pub/mirrors/maven2/org/acegisecurity/</url>
+			<id>sonatype</id>
+			<name>sonatype</name>
+			<url>https://oss.sonatype.org/content/repositories/releases/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
 			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>mvnrepository</id>
-			<name>mvnrepository</name>
-			<url>http://mvnrepository.com/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>maven</id>
-			<name>maven</name>
-			<url>http://search.maven.org/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
+				<enabled>false</enabled>
 			</snapshots>
 		</repository>
 	</repositories>

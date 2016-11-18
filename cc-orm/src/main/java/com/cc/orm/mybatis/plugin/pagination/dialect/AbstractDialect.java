@@ -3,7 +3,7 @@ package com.cc.orm.mybatis.plugin.pagination.dialect;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.cc.orm.mybatis.plugin.pagination.Page;
+import com.cc.orm.mybatis.plugin.pagination.page.Page;
 
 /**
  * @author wenlongchen
@@ -19,6 +19,7 @@ public abstract class AbstractDialect {
   private static final Pattern GROUP_BY =
       Pattern.compile("\\sgroup\\sby\\s[^)]+$", Pattern.CASE_INSENSITIVE);
 
+  @SuppressWarnings("rawtypes")
   public abstract String getPageSql(String originalSql, Page page);
 
   public static String getCountSql(String originalSql) {

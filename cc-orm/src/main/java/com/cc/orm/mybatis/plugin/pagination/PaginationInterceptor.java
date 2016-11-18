@@ -17,6 +17,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.cc.orm.mybatis.plugin.pagination.dialect.AbstractDialect;
 import com.cc.orm.mybatis.plugin.pagination.dialect.DialectEnum;
+import com.cc.orm.mybatis.plugin.pagination.page.Page;
 import com.cc.tool.IConstant;
 
 import org.apache.ibatis.executor.Executor;
@@ -81,6 +82,7 @@ public class PaginationInterceptor implements Interceptor {
     return invocation.proceed();
   }
 
+  @SuppressWarnings("rawtypes")
   private final MappedStatement getPageStatement(MappedStatement ms, BoundSql boundSql,
       Page page) {
     String id = ms.getId();
@@ -125,6 +127,7 @@ public class PaginationInterceptor implements Interceptor {
     return ms;
   }
 
+  @SuppressWarnings("rawtypes")
   private static final int getCount(Connection connection, BoundSql boundSql, Page page,
       MappedStatement mappedStatement) throws SQLException {
     int count = 0;

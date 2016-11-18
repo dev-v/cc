@@ -1,14 +1,14 @@
-package com.cc.orm.mybatis.plugin.pagination;
+package com.cc.orm.mybatis.plugin.pagination.page;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author wenlongchen
- * @since Nov 1, 2016
+ * @param <E> 查询返回的数据类型
+ * @param <Q> 查询条件类型
  */
-public class Page {
+public class Page <E,Q>{
 
   public static final long MAX_PAGE_SIZE = 1000;
 
@@ -35,7 +35,12 @@ public class Page {
   /**
    * 当前页查询的数据
    */
-  private List<Map<String, Object>> datas;
+  private List<E> datas;
+
+  /**
+   * 查询条件
+   */
+  private Q condition;
 
   /**
    * 排序字段
@@ -72,11 +77,6 @@ public class Page {
     this(1);
   }
 
-  /**
-   * 查询条件
-   */
-  private Map<String, String> condition;
-
   public long getCurrentPage() {
     return currentPage;
   }
@@ -101,19 +101,19 @@ public class Page {
     return allPage;
   }
 
-  public List<Map<String, Object>> getDatas() {
+  public List<E> getDatas() {
     return datas;
   }
 
-  public void setDatas(List<Map<String, Object>> datas) {
+  public void setDatas(List<E> datas) {
     this.datas = datas;
   }
 
-  public Map<String, String> getCondition() {
+  public Q getCondition() {
     return condition;
   }
 
-  public void setCondition(Map<String, String> condition) {
+  public void setCondition(Q condition) {
     this.condition = condition;
   }
 
