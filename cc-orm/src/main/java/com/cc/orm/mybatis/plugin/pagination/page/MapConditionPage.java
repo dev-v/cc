@@ -11,4 +11,16 @@ import java.util.Map;
  */
 public class MapConditionPage<E> extends Page<E, Map<String,Object>> {
 
+  public MapConditionPage() {
+    super();
+  }
+
+  public MapConditionPage(long currentPage, long pageSize) {
+    super(currentPage, pageSize);
+  }
+
+  public MapConditionPage(long currentPage) {
+    super(currentPage);
+  }
+
 }

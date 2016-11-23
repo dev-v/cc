@@ -11,6 +11,8 @@ import java.util.List;
 public class Page <E,Q>{
 
   public static final long MAX_PAGE_SIZE = 1000;
+  
+  public static final String CONDITION_FIELD_NAME="condition";
 
   /**
    * 当前页，从1开始
