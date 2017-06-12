@@ -1,0 +1,84 @@
+<!DOCTYPE report SYSTEM "csv.dtd">
+<report>
+	<filename>防病毒软件运行信息统计报表${startDate}到${endDate}</filename>
+	<params>
+		<param name="startDate" value="00"/>
+		<param name="endDate" value="11"/>
+	</params>
+	<sources>
+		<source name="knowledgeClass">
+			<sql value="select * from ITOM_KNOWLEDGE_CLASS">
+				<fields>
+					<field name="id"></field>
+					<field name="name"></field>
+				</fields>
+			</sql>
+		</source>
+		<source name="knowledge">
+			<sql value="select * from ITOM_KNOWLEDGE">
+				<fields>
+					<field name="subject"></field>
+					<field name="keywords"></field>
+					<field name="content"></field>
+					<field name="id"></field>
+					<field name="modifies">
+						<sql value="
+							select * from ITOM_KNOWLEDGE_MODIFY
+							where knowledgeId=${id}">
+							<fields>
+								<field name="subject"></field>
+								<field name="keywords"></field>
+								<field name="content"></field>
+								<field name="oldVersions"></field>
+								<field name="knowledgeClassId"></field>
+							</fields>
+						</sql>
+					</field>
+				</fields>
+			</sql>
+		</source>
+	</sources>
+	
+	<page fontSize="12" pageType="a4">
+		<table>
+			<!-- <tr>
+				<td>时间段：${startDate}到${endDate}</td>
+			</tr>
+			<tr>
+				<td>知识主题</td>
+				<td>知识关键词</td>
+				<td>
+					<table>
+						<tr>
+							<td>修订记录</td>
+						</tr>
+						<tr>
+							<td>版本号</td>
+							<td>修订主题</td>
+							<td>修订关键字</td>
+							<td>分类</td>
+						</tr>
+					</table>
+				</td>
+				<td>知识内容</td>
+			</tr> -->
+			<tr source="${knowledge}">
+				<td>${subject}</td>
+				<td>${keywords}</td>
+				<td>
+					<table>
+						<tr source="${modifies}">
+							<td>${oldVersions}</td>
+							<td>${subject}</td>
+							<td>${keywords}</td>
+							<td>${knowledgeClassId}
+								<labels label="name" value="id" source="${knowledgeClass}"/>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td>${content}</td>
+			</tr>
+		 </table>
+	</page>
+</report>

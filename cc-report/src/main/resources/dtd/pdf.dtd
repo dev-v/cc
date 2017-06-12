@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT report (filename,params?,sources?,page)>
+<!ATTLIST report 
+	type (pdf) #FIXED "pdf">
+
+<!ELEMENT filename (#PCDATA)>
+<!ATTLIST filename
+	length CDATA #IMPLIED>
+	
+<!ELEMENT params (param+)>
+
+<!ELEMENT param EMPTY>
+<!-- 数据需使用的初始参数定义，可以在报表文件中写死，但外部传入一个同名的参数将覆盖xml文件中的值 -->
+<!ATTLIST param
+	name CDATA #REQUIRED
+	value CDATA #IMPLIED>
+	
+<!ELEMENT sources (source+)>
+<!ELEMENT source (sql|hibernate)>
+<!-- 数据源属性定义
+	name:数据源名称，生成报表时作为该数据源的引用
+	type:获取数据源的方式，编写sql语句获取（默认），通过实体类获取（未实现）
+ -->
+<!ATTLIST source 
+	name CDATA #REQUIRED
+	type (sql|hibernate) "sql">
+	
+<!ELEMENT sql (fields)>
+<!ATTLIST sql 
+	value CDATA #REQUIRED>
+	
+<!ELEMENT hibernate (params?,fields?)>
+<!ATTLIST hibernate
+	dao CDATA #REQUIRED
+	po CDATA #REQUIRED
+	method CDATA #REQUIRED>
+	
+<!ELEMENT fields (field+)>
+
+<!ELEMENT field (#PCDATA|sql|hibernate)*>
+<!ATTLIST field 
+	name CDATA #REQUIRED>
+<!ELEMENT page (image*,table+)>
+<!ATTLIST page
+	align (left|center|right) "center"
+	vAlign (top|middle|bottom) "middle"
+	border (true|false) "true"
+	borderType (border_none|border_dashed|border_hair|border_double|
+				border_dotted|border_dash_dot|border_thin) "border_thin"
+	borderWeight CDATA "0.1"
+	borderColor (white|lightGray|gray|darkGray|black|red|
+				pink|orange|yellow|green|magenta|cyan|blue) "black"
+	borderLeft (true|false) #IMPLIED
+	borderRight (true|false) #IMPLIED
+	borderTop (true|false) #IMPLIED
+	borderBottom (true|false) #IMPLIED
+	blackColor (white|lightGray|gray|darkGray|black|red|
+				pink|orange|yellow|green|magenta|cyan|blue) "white"
+	fontFamily (TimesNewRoman|Symbol|ZapfDingbats|Helvetica|Courier) "TimesNewRoman"
+	fontStyle (normal|bold|italic|underline|oblique|line-through) "normal"
+	fontSize CDATA "10"
+	fontColor (white|lightGray|gray|darkGray|black|red|
+			pink|orange|yellow|green|magenta|cyan|blue) "black"
+	width CDATA "595"
+	height CDATA "842"
+	ending CDATA "..."
+	blank CDATA "-"
+	margin CDATA "20"
+	marginLeft CDATA #IMPLIED
+	marginRight CDATA #IMPLIED
+	marginTop CDATA #IMPLIED
+	marginBottom CDATA #IMPLIED
+			
+	pageType (a0|a1|a2|a3|a4|a5|a6|a7|a8|a9|a10|
+				b0|b1|b2|b3|b4|b5|b6|b7|b8|b9|b10|
+				arch_a|arch_b|arch_c|arch_d) #IMPLIED>
+<!ELEMENT image EMPTY>
+<!ATTLIST image
+	beginx CDATA "0"
+	beginy CDATA "0"
+	endx CDATA #IMPLIED
+	endy CDATA #IMPLIED
+	transparence CDATA "50"
+	transparenceLeft CDATA "50"
+	transparenceRight CDATA "50"
+	width CDATA "100"
+	height CDATA "100"
+	src CDATA #REQUIRED>
+<!ELEMENT table (tr+)>
+<!-- table属性        
+	 sourceType (normal|subtr) "normal"
+	 sourceTrIndex CDATA  #IMPLIED
+  -->
+<!ATTLIST table 
+	align (left|center|right) #IMPLIED
+	vAlign (top|middle|bottom) #IMPLIED
+	border (true|false) #IMPLIED
+	borderType (border_none|border_dashed|border_hair|border_double|
+				border_dotted|border_dash_dot|border_thin) #IMPLIED
+	borderWeight CDATA #IMPLIED
+	borderColor (white|lightGray|gray|darkGray|black|red|
+				pink|orange|yellow|green|magenta|cyan|blue) #IMPLIED
+	borderLeft (true|false) #IMPLIED
+	borderRight (true|false) #IMPLIED
+	borderTop (true|false) #IMPLIED
+	borderBottom (true|false) #IMPLIED
+	blackColor (white|lightGray|gray|darkGray|black|red|
+				pink|orange|yellow|green|magenta|cyan|blue) #IMPLIED
+	fontFamily (TimesNewRoman|Symbol|ZapfDingbats|Helvetica|Courier) #IMPLIED
+	fontStyle (normal|bold|italic|underline|oblique|line-through) #IMPLIED
+	fontSize CDATA #IMPLIED
+	fontColor (white|lightGray|gray|darkGray|black|red|
+			pink|orange|yellow|green|magenta|cyan|blue) #IMPLIED
+	width CDATA #IMPLIED
+	height CDATA #IMPLIED
+	ending CDATA #IMPLIED
+	blank CDATA #IMPLIED
+	margin CDATA "0"
+	marginLeft CDATA #IMPLIED
+	marginRight CDATA #IMPLIED
+	marginTop CDATA #IMPLIED
+	marginBottom CDATA #IMPLIED
+	
+	fill CDATA "100">
+<!ELEMENT tr (td+)>
+<!-- source：params:xml中配置的值
+			parent：父tr中配置的source
+			sources，配置的根数据源
+			其他字符：从父source迭代出来的数据集合
+-->
+<!ATTLIST tr 
+	align (left|center|right) #IMPLIED
+	vAlign (top|middle|bottom) #IMPLIED
+	border (true|false) #IMPLIED
+	borderType (border_none|border_dashed|border_hair|border_double|
+				border_dotted|border_dash_dot|border_thin) #IMPLIED
+	borderWeight CDATA #IMPLIED
+	borderColor (white|lightGray|gray|darkGray|black|red|
+				pink|orange|yellow|green|magenta|cyan|blue) #IMPLIED
+	borderLeft (true|false) #IMPLIED
+	borderRight (true|false) #IMPLIED
+	borderTop (true|false) #IMPLIED
+	borderBottom (true|false) #IMPLIED
+	blackColor (white|lightGray|gray|darkGray|black|red|
+				pink|orange|yellow|green|magenta|cyan|blue) #IMPLIED
+	fontFamily (TimesNewRoman|Symbol|ZapfDingbats|Helvetica|Courier) #IMPLIED
+	fontStyle (normal|bold|italic|underline|oblique|line-through) #IMPLIED
+	fontSize CDATA #IMPLIED
+	fontColor (white|lightGray|gray|darkGray|black|red|
+			pink|orange|yellow|green|magenta|cyan|blue) #IMPLIED
+	width CDATA #IMPLIED
+	height CDATA #IMPLIED
+	ending CDATA #IMPLIED
+	blank CDATA #IMPLIED
+	margin CDATA #IMPLIED
+	marginLeft CDATA #IMPLIED
+	marginRight CDATA #IMPLIED
+	marginTop CDATA #IMPLIED
+	marginBottom CDATA #IMPLIED
+	
+	source CDATA "parent">
+<!ELEMENT td (#PCDATA|table|img|labels|label)*>
+<!--        td属性           -->
+<!ATTLIST td
+	align (left|center|right) #IMPLIED
+	vAlign (top|middle|bottom) #IMPLIED
+	border (true|false) #IMPLIED
+	borderType (border_none|border_dashed|border_hair|border_double|
+				border_dotted|border_dash_dot|border_thin) #IMPLIED
+	borderWeight CDATA #IMPLIED
+	borderColor (white|lightGray|gray|darkGray|black|red|
+				pink|orange|yellow|green|magenta|cyan|blue) #IMPLIED
+	borderLeft (true|false) #IMPLIED
+	borderRight (true|false) #IMPLIED
+	borderTop (true|false) #IMPLIED
+	borderBottom (true|false) #IMPLIED
+	blackColor (white|lightGray|gray|darkGray|black|red|
+				pink|orange|yellow|green|magenta|cyan|blue) #IMPLIED
+	fontFamily (TimesNewRoman|Symbol|ZapfDingbats|Helvetica|Courier) #IMPLIED
+	fontStyle (normal|bold|italic|underline|oblique|line-through) #IMPLIED
+	fontSize CDATA #IMPLIED
+	fontColor (white|lightGray|gray|darkGray|black|red|
+			pink|orange|yellow|green|magenta|cyan|blue) #IMPLIED
+	ending CDATA #IMPLIED
+	blank CDATA #IMPLIED
+	margin CDATA "2"
+	marginLeft CDATA #IMPLIED
+	marginRight CDATA #IMPLIED
+	marginTop CDATA #IMPLIED
+	marginBottom CDATA #IMPLIED
+	width CDATA "50"
+	height CDATA "20"
+	
+	combine (true|false) "false"
+	begin CDATA #IMPLIED
+	length CDATA #IMPLIED
+	colSpan CDATA "1"
+	rowSpan CDATA "1"
+	field CDATA #IMPLIED>
+<!ELEMENT img (#PCDATA)>
+<!ATTLIST img 
+	width CDATA "100"
+	height CDATA "100"
+	src CDATA #REQUIRED>
+<!ELEMENT labels EMPTY>
+<!ATTLIST labels
+	sourceType (sources|parent) "sources"
+	source CDATA #REQUIRED
+	label CDATA #REQUIRED
+	value CDATA #REQUIRED>
+<!ELEMENT label (#PCDATA)>
+<!ATTLIST label
+	value CDATA #REQUIRED>

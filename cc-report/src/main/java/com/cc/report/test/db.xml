@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+	<user>root</user>
+	<pass>123qwe</pass>
+	<url>
+		jdbc:mysql://127.0.0.1:3306/itom3?useUnicode=true&amp;characterEncoding=utf-8&amp;allowMultiQueries=true
+	</url>
+	<driver>com.mysql.jdbc.Driver</driver>
+</database>

@@ -1,0 +1,63 @@
+<!DOCTYPE report SYSTEM "xls.dtd">
+<report>
+	<filename>${startDate}到${endDate}</filename>
+	<params>
+		<param name="startDate" value="00"/>
+		<param name="endDate" value="11"/>
+	</params>
+	
+	<page fontSize="12" fontColor="green" borderWeight="1" align="center" pageType="a4">
+		<table>
+			<tr>
+				<td colSpan="6">时间段：${startDate}到${endDate}</td>
+			</tr>
+			<tr marginLeft="0">
+				<td fontColor="maroon" width="10">主题</td>
+				<td combine="true" >关键字</td>
+				<td>
+					<table>
+						<tr>
+							<td>版本</td>
+							<td>主题</td>
+							<td combine="true">关键字</td>
+						</tr>
+						<tr>
+							<td>版本</td>
+							<td>主题</td>
+							<td combine="true">关键字</td>
+						</tr>
+					</table>
+				</td>
+				<td combine="true" borderColor="brown">内容</td>
+			</tr>
+			<tr marginLeft="0">
+				<td fontColor="maroon" width="10">主题</td>
+				<td combine="true" >关键字</td>
+				<td>
+					<table>
+						<tr>
+							<td>版本</td>
+							<td>主题</td>
+							<td combine="true">关键字</td>
+						</tr>
+					</table>
+				</td>
+				<td combine="true" borderColor="brown">内容</td>
+			</tr>
+			<tr marginLeft="0">
+				<td fontColor="maroon" width="10">主题</td>
+				<td combine="true" >关键字</td>
+				<td>
+					<table>
+						<tr>
+							<td>版本</td>
+							<td>主题</td>
+							<td combine="true">关键字</td>
+						</tr>
+					</table>
+				</td>
+				<td combine="true" borderColor="brown">内容</td>
+			</tr>
+		 </table>
+	</page>
+</report>

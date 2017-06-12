@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE report SYSTEM "dtd/xls.dtd" >
+<report>
+  <filename>测试报表</filename>
+  <sources>
+  	<source name="test">
+  		<sql value="
+  		SELECT level,persons,alarmtype,projectname,content,alarm_date from alarm_result 
+  		">
+  			<fields>
+  				<field name="level"/>
+  				<field name="persons"/>
+  				<field name="alarmtype"/>
+  				<field name="projectname"/>
+  				<field name="content"/>
+  				<field name="alarm_date"/>
+  			</fields>
+  		</sql>
+  	</source>
+  </sources>
+  <page>
+    <table>
+      <tr>
+      	<td>adfas
+      	</td>
+      	<td>adfas
+      	</td>
+      </tr>
+      <tr>
+      	<td>adfas
+      	</td>
+      	<td>adfas
+      	</td>
+      </tr>
+      <tr source="test" fontColor="red">
+        <td field="projectname"/>
+        <td field="level"/>
+        <td field="alarm_date"/>
+        <td field="content"/>
+        <td>
+        	<table>
+        		<tr borderColor="blue">
+        			<td>sadfasf</td>
+        			<td>sadfasf</td>
+        			<td>sadfasf</td>
+        			<td>sadfasf</td>
+        			<td>sadfasf</td>
+        		</tr>
+        	</table>
+        </td>
+      </tr>
+    </table>
+    
+    <table>
+    	<tr>
+    		<td>aaaaaaaaaaaaaaa</td>
+    	</tr>
+    </table>
+  </page>
+</report>

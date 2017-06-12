@@ -1,0 +1,63 @@
+<!DOCTYPE report SYSTEM "doc.dtd">
+<report>
+	<filename>防病毒软件运行信息统计报表${startDate}到${endDate}</filename>
+	<params>
+		<param name="startDate" value="aaaaaaaaaaa"/>
+		<param name="endDate" value="bbbbbbbbb"/>
+	</params>
+	<sources>
+		<source name="event">
+			<sql value="select * from rm_event t where PK_EVENTID &lt; 2220000">
+				<fields>
+					<field name="PK_EVENTID">事件id</field>
+					<field name="EVENTTYPE">事件类型id</field>
+					<field name="EVENTNAME">事件名称</field>
+					<field name="DESCRIPTION">事件描述</field>
+					<field name="DEVICETYPE">设备类型</field>
+					<field name="CAUSE">事件原因</field>
+				</fields>
+			</sql>
+		</source>	
+		<source name="eventtype">
+			<sql value="select * from rm_eventtype t where PK_EVENTTYPEID &lt; 1 order by PK_EVENTTYPEID asc">
+				<fields>
+					<field name="PK_EVENTTYPEID">事件类型id</field>
+					<field name="NAME">事件类型名称</field>
+					<field name="PERCENTC"></field>
+					<field name="PERCENTI"></field>
+					<field name="PERCENTA"></field>
+					<field name="event">
+						<sql value="select * from rm_event where EVENTTYPE=${[current].PK_EVENTTYPEID}">
+							<fields>
+								<field name="PK_EVENTID">事件id</field>
+								<field name="EVENTTYPE">事件类型id</field>
+								<field name="EVENTNAME">事件名称</field>
+								<field name="DESCRIPTION">事件描述</field>
+								<field name="DEVICETYPE">设备类型</field>
+								<field name="CAUSE">事件原因</field>
+							</fields>
+						</sql>
+					</field>
+				</fields>
+			</sql>
+		</source>
+	</sources>
+	
+	<page blackColor="lightGray" fontColor="black" align="center" pageType="a4">
+		<table border="true">
+			<tr>
+				<td colSpan="6" border="false">时间段：${startDate}到${endDate}</td>
+			</tr>
+			<tr source="event" marginLeft="0">
+				<td field="PK_EVENTID" width="50">事件id</td>
+				<td field="EVENTTYPE" combine="true" width="25">
+					<labels value="PK_EVENTTYPEID" label="NAME" source="eventtype"/>
+				</td>
+				<td field="EVENTNAME" combine="true" borderColor="blue" width="60">事件名称</td>
+				<td field="DESCRIPTION" width="300">事件描述</td>
+				<td field="DEVICETYPE" width="80">设备类型</td>
+				<td field="CAUSE" width="500">事件原因</td>
+			</tr>
+		 </table>
+	</page>
+</report>

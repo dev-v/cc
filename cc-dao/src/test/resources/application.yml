@@ -1,0 +1,78 @@
+spring:
+  profiles:
+    active: dev
+  mvc:
+    static-path-pattern: /**
+    
+logging:
+  path: logs
+  
+---
+spring:
+  profiles: local
+
+---
+spring:
+  profiles: dev
+  
+db.datasource:
+  oracle:
+    mainapp:
+      url: jdbc:oracle:thin:@10.18.19.33:1521:dbdev2
+      username: sl_main
+      password: sl_main
+      driver: oracle.jdbc.OracleDriver
+      
+  mysql:  
+      dajobschema:
+        url: jdbc:mysql://10.18.19.43:3307/information_schema?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&autoReconnect=true
+        username: dajob_bizdata
+        password: dajob_bizdata_dev
+        driver: com.mysql.jdbc.Driver
+        
+      crm:
+        url: jdbc:mysql://10.18.19.43:3307/information_schema?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&autoReconnect=true
+        username: wfcrm
+        password: wfcrm_dev
+        driver: com.mysql.jdbc.Driver
+        
+      
+---
+spring:
+  profiles: demo
+  
+db.datasource:
+  oracle:
+    mainapp:
+      url: jdbc:oracle:thin:@10.18.19.32:1521:testdb2
+      username: slprod
+      password: U3F3A3C4694CF47C
+      driver: oracle.jdbc.OracleDriver
+      
+  mysql:  
+      dajobschema:
+        url: jdbc:mysql://10.18.19.170:3307/information_schema?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&autoReconnect=true
+        username: dajob_bizdata
+        password: dajob_bizdata_demo
+        driver: com.mysql.jdbc.Driver
+  
+---
+spring:
+  profiles: stage
+  
+db.datasource:
+  oracle:
+    mainapp:
+      url: jdbc:oracle:thin:@10.18.19.49:1521:stage
+      username: slprod
+      password: slprod#stage
+      driver: oracle.jdbc.OracleDriver
+    wm:
+      url: jdbc:oracle:thin:@10.18.19.49:1521:stage
+      username: wmprod
+      password: wmprod#stage
+      driver: oracle.jdbc.OracleDriver
+  
+---
+spring:
+  profiles: product

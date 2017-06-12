@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ENTITY color "(white|lightGray|gray|darkGray|black|red|
+				pink|orange|yellow|green|magenta|cyan|blue)">
+<!--
+   pdf报表的xml文件的DTD描述文件
+   其头部需使用下面的 DOCTYPE
+   <!DOCTYPE report SYSTEM "..\..\dtd\pdf.dtd">
+-->
+<!ELEMENT report (filename,params?,sources?,page)>
+<!ATTLIST report 
+	type (pdf) #FIXED "pdf"
+>
+
+<!ELEMENT filename (#PCDATA)>
+<!ATTLIST filename
+	length CDATA #IMPLIED>
+	
+<!ELEMENT params (param+)>
+
+<!ELEMENT param (#PCDATA)>
+<!-- 数据需使用的初始参数定义，可以在报表文件中写死，但外部传入一个同名的参数将覆盖xml文件中的值 -->
+<!ATTLIST param
+	name CDATA #REQUIRED>
+	
+<!-- 从数据库获取的数据源根节点配置 -->
+<!ELEMENT sources (source+)>
+
+<!-- 数据源可以使用sql或实体类（hibernate），后者暂未实现 -->
+<!ELEMENT source (sql|hibernate)>
+<!-- 数据源属性定义
+	name:数据源名称，生成报表时作为该数据源的引用
+	type:获取数据源的方式，编写sql语句获取（默认），通过实体类获取（未实现）
+ -->
+<!ATTLIST source 
+	name CDATA #REQUIRED
+	type (sql|hibernate) "sql">
+	
+<!ELEMENT sql (fields)>
+<!ATTLIST sql 
+	value CDATA #REQUIRED>
+	
+<!ELEMENT hibernate (params?,fields?)>
+<!ATTLIST hibernate
+	dao CDATA #REQUIRED
+	po CDATA #REQUIRED
+	method CDATA #REQUIRED>
+	
+<!ELEMENT fields (field+)>
+
+<!ELEMENT field (#PCDATA|sql|hibernate)*>
+<!ATTLIST field 
+	name CDATA #REQUIRED>
+<!-- 页面格式配置根节点 -->
+<!ELEMENT page (image*,table+)>
+<!-- page属性
+	blackColor 页面背景颜色（随着java的发展变化）
+	pageType 页面纸张类型
+	blank 当单元格内容为null或""时，用于填充该单元格的值，若不想填充可设为"",默认为"-"
+	marginLeft 页面内容距纸张左边的距离
+	marginRight 页面内容距纸张右边的距离
+	marginTop 页面内容距纸张上边的距离
+	marginBottom 页面内容距纸张下边的距离
+	margin 页面内容距纸张上下左右的距离，若其他四个设有值，则会被其覆盖
+	width 内容宽度
+	height 内容高度
+	fontStyle 全局字体类型
+	fontSize 全局字体大小
+	fontColor 全局字体颜色（随着java的发展变化）
+	align 内容水平对齐方式
+	vAlign 内容垂直对齐方式
+-->
+<!ATTLIST page
+	blackColor (white|lightGray|gray|darkGray|black|red|
+				pink|orange|yellow|green|magenta|cyan|blue) "white"
+	pageType (a0|a1|a2|a3|a4|a5|a6|a7|a8|a9|a10|
+				b0|b1|b2|b3|b4|b5|b6|b7|b8|b9|b10|
+				arch_a|arch_b|arch_c|arch_d) "a4"
+	ending CDATA "..."
+	margin CDATA "20"
+	marginLeft CDATA #IMPLIED
+	marginRight CDATA #IMPLIED
+	marginTop CDATA #IMPLIED
+	marginBottom CDATA #IMPLIED
+	blank CDATA "-"
+	width CDATA "595"
+	height CDATA "842"
+	fontFamily (宋体|隶书|黑体|Arial|Century) "宋体"
+	fontStyle (normal|bold|italic|underline|strikethru|bolditalic) "normal"
+	fontSize CDATA "10"
+	fontColor (white|lightGray|gray|darkGray|black|red|
+			pink|orange|yellow|green|magenta|cyan|blue) "black"
+	align (left|center|right) "center"
+	vAlign (top|middle|bottom) "middle">
+<!ELEMENT image EMPTY>
+<!ATTLIST image
+	beginx CDATA "0"
+	beginy CDATA "0"
+	endx CDATA #IMPLIED
+	endy CDATA #IMPLIED
+	transparence CDATA "50"
+	transparenceLeft CDATA "50"
+	transparenceRight CDATA "50"
+	width CDATA "100"
+	height CDATA "100"
+	src CDATA #REQUIRED>
+<!ELEMENT table (tr+)>
+<!-- table属性        
+	 sourceType (normal|subtr) "normal"
+	 sourceTrIndex CDATA  #IMPLIED
+  -->
+<!ATTLIST table 
+	fill CDATA "100"
+	align (left|center|right) "center"
+	vAlign (top|middle|bottom) "middle"
+	border (true|false) "true"
+	borderType  (none|dashed|hair|double|
+				dotted|dash_dot|thin) "thin"
+	borderWeight CDATA "10"
+	borderColor (white|lightGray|gray|darkGray|black|red|
+				pink|orange|yellow|green|magenta|cyan|blue) "black"
+	borderLeft (true|false) #IMPLIED
+	borderRight (true|false) #IMPLIED
+	borderTop (true|false) #IMPLIED
+	borderBottom (true|false) #IMPLIED>
+<!ELEMENT tr (td+)>
+<!ATTLIST tr 
+	source CDATA "local"
+	align (left|center|right) #IMPLIED
+	vAlign (top|middle|bottom) #IMPLIED
+	fontFamily (宋体|隶书|黑体|Arial|Century) #IMPLIED
+	fontStyle (normal|bold|italic|underline|strikethru|bolditalic) #IMPLIED
+	fontSize CDATA #IMPLIED
+	fontColor (white|lightGray|gray|darkGray|black|red|
+			pink|orange|yellow|green|magenta|cyan|blue) #IMPLIED
+	border (true|false)  #IMPLIED
+	borderType  (none|dashed|hair|double|
+				dotted|dash_dot|thin) #IMPLIED
+	borderWeight CDATA #IMPLIED
+	borderColor (white|lightGray|gray|darkGray|black|red|
+				pink|orange|yellow|green|magenta|cyan|blue) #IMPLIED
+	borderLeft (true|false) #IMPLIED
+	borderRight (true|false) #IMPLIED
+	borderTop (true|false) #IMPLIED
+	borderBottom (true|false) #IMPLIED>
+<!ELEMENT td (#PCDATA|table|img|labels|label)*>
+<!--        td属性           -->
+<!ATTLIST td
+	combine (true|false) "false"
+	blackColor  (white|lightGray|gray|darkGray|black|red|
+				pink|orange|yellow|green|magenta|cyan|blue) #IMPLIED
+	blank CDATA #IMPLIED
+	border (true|false) #IMPLIED
+	borderLeft (true|false) #IMPLIED
+	borderRight (true|false) #IMPLIED
+	borderTop (true|false) #IMPLIED
+	borderBottom (true|false) #IMPLIED
+	begin CDATA #IMPLIED
+	length CDATA #IMPLIED
+	colSpan CDATA "1"
+	rowSpan CDATA "1"
+	fontStyle (normal|bold|italic|underline|strikethru|bolditalic) #IMPLIED
+	fontSize CDATA #IMPLIED
+	fontColor (white|lightGray|gray|darkGray|black|red|
+			pink|orange|yellow|green|magenta|cyan|blue) #IMPLIED
+	width CDATA #IMPLIED
+	align (left|center|right) #IMPLIED
+	vAlign (top|middle|bottom) #IMPLIED
+	field CDATA #IMPLIED>
+<!ELEMENT img (#PCDATA)>
+<!ATTLIST img 
+	width CDATA "100"
+	height CDATA "100"
+	src CDATA #REQUIRED>
+<!ELEMENT labels EMPTY>
+<!ATTLIST labels
+	sourceType (sources|parent) "sources"
+	source CDATA #REQUIRED
+	label CDATA #REQUIRED
+	value CDATA #REQUIRED>
+<!ELEMENT label (#PCDATA)>
+<!ATTLIST label
+	value CDATA #REQUIRED>

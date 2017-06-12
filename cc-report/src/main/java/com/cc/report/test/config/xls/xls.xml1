@@ -1,0 +1,54 @@
+<!DOCTYPE report SYSTEM "xls.dtd">
+<report>
+	<filename>防病毒软件运行信息统计报表${startDate}到${endDate}</filename>
+	<params>
+		<param name="startDate" value="00"/>
+		<param name="endDate" value="11"/>
+	</params>
+	<sources>
+		<source name="knowledge">
+			<sql value="select * from ITOM_KNOWLEDGE">
+				<fields>
+					<field name="subject"></field>
+					<field name="keywords"></field>
+					<field name="content"></field>
+					<field name="id"></field>
+					<field name="modifies">
+						<sql value="
+							select * from ITOM_KNOWLEDGE_MODIFY  
+							where knowledgeId=${[current].id}">
+							<fields>
+								<field name="subject"></field>
+								<field name="keywords"></field>
+								<field name="content"></field>
+								<field name="oldVersions"></field>
+							</fields>
+						</sql>
+					</field>
+				</fields>
+			</sql>
+		</source>
+	</sources>
+	
+	<page fontSize="12" fontColor="green" borderWeight="1" align="center" pageType="a4">
+		<table>
+			<tr>
+				<td colSpan="6">时间段：${startDate}到${endDate}</td>
+			</tr>
+			<tr source="knowledge" marginLeft="0">
+				<td field="subject" width="50" fontColor="maroon">事件id</td>
+				<td field="keywords" combine="true" width="25"></td>
+				<td>
+					<table>
+						<tr source="modifies">
+							<td field="oldVersions"></td>
+							<td field="subject" combine="true"></td>
+							<td field="keywords" combine="true"></td>
+						</tr>
+					</table>
+				</td>
+				<td field="content" combine="true" borderColor="brown" width="60">事件名称</td>
+			</tr>
+		 </table>
+	</page>
+</report>

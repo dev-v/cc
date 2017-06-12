@@ -1,5 +1,8 @@
 package com.cc.tool;
 
+import java.util.Collection;
+import java.util.List;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -22,6 +25,10 @@ public class BeanUtil {
    */
   public static final <T> T o2o(Object source, Class<T> targetClass) {
     return JSON.toJavaObject((JSON) JSON.toJSON(source), targetClass);
+  }
+
+  public static final <T> List<T> o2o(Collection<?> source, Class<T> targetClass) {
+    return JSONArray.parseArray(JSON.toJSONString(source), targetClass);
   }
 
   /**
@@ -68,18 +75,19 @@ public class BeanUtil {
    * 获取对象的属性值
    * 不支持枚举、基础类型、集合 参数为这些值时返回null
    * </pre>
+   * 
    * @param obj
    * @param property
    * @return
    */
-  public static <T> T getProperty(Object obj, String property,Class<T> clazz) {
-    obj=JSON.toJSON(obj);
-    if(obj instanceof JSONObject){
-      return ((JSONObject)obj).getObject(property,clazz);
+  public static <T> T getProperty(Object obj, String property, Class<T> clazz) {
+    obj = JSON.toJSON(obj);
+    if (obj instanceof JSONObject) {
+      return ((JSONObject) obj).getObject(property, clazz);
     }
     return null;
   }
-  
+
   /**
    * @param obj
    * @param property

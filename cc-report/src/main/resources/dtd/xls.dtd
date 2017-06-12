@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   pdf报表的xml文件的DTD描述文件
+   其头部需使用下面的 DOCTYPE
+   <!DOCTYPE report SYSTEM "xls.dtd">
+ 	fileName CDATA #REQUIRED
+-->
+<!ELEMENT report (filename,params?,sources?,page)>
+<!ATTLIST report 
+	type (xls) #FIXED "xls"
+>
+<!ELEMENT filename (#PCDATA)>
+<!ATTLIST filename
+	length CDATA #IMPLIED>
+<!ELEMENT params (param*)>
+<!ELEMENT param EMPTY>
+<!-- 数据需使用的初始参数定义，可以在报表文件中写死，但外部传入一个同名的参数将覆盖xml文件中的值 -->
+<!ATTLIST param
+	name CDATA #REQUIRED
+	value CDATA #IMPLIED>
+<!ELEMENT sources (source+)>
+<!ELEMENT source (sql|hibernate)>
+<!ATTLIST source 
+	name CDATA #REQUIRED
+	type (sql|hibernate) "sql">
+<!ELEMENT sql (fields,(list)?)>
+<!ATTLIST sql 
+	value CDATA #REQUIRED>
+<!ELEMENT list (map+)>
+<!ELEMENT map (key+)>
+<!ELEMENT key EMPTY>
+<!ATTLIST key 
+	name CDATA #REQUIRED
+	value CDATA #REQUIRED>
+<!ELEMENT fields (field+)>
+<!ELEMENT field (#PCDATA|sql|hibernate)*>
+<!ATTLIST field 
+	name CDATA #REQUIRED>
+<!ELEMENT hibernate (params?,fields?)>
+<!ATTLIST hibernate
+	dao CDATA #REQUIRED
+	po CDATA #REQUIRED
+	method CDATA #REQUIRED>
+<!ELEMENT page (image*,table+)>
+<!--        page属性            -->
+<!ATTLIST page 
+	align (general|left|center|right|fill|justify|center_selection) "center"
+	vAlign (top|middle|bottom|vjustify) "middle"
+	border (true|false) "true"
+	borderType (none|thin|medium|dashed|hair|thick|double|dotted|medium_dashed|dash_dot|
+				medium_dash_dot|dash_dot_dot|medium_dash_dot_dot|slanted_dash_dot) "thin"
+	borderWeight CDATA "10"
+	borderColor (automatic|light_cornflower_blue|royal_blue|coral|orchid|maroon|lemon_chiffon|
+				cornflower_blue|white|lavender|pale_blue|light_turquoise|light_green|light_yellow|
+				tan|rose|grey_25_percent|plum|sky_blue|turquoise|bright_green|yellow|gold|pink|
+				grey_40_percent|violet|light_blue|aqua|sea_green|lime|light_orange|red|grey_50_percent|
+				blue_grey|blue|teal|green|dark_yellow|orange|dark_red|grey_80_percent|indigo|dark_blue|
+				dark_teal|dark_green|olive_green|brown|black) "black"
+	borderLeft (true|false) #IMPLIED
+	borderRight (true|false) #IMPLIED
+	borderTop (true|false) #IMPLIED
+	borderBottom (true|false) #IMPLIED
+	blackColor (automatic|light_cornflower_blue|royal_blue|coral|orchid|maroon|lemon_chiffon|
+				cornflower_blue|white|lavender|pale_blue|light_turquoise|light_green|light_yellow|
+				tan|rose|grey_25_percent|plum|sky_blue|turquoise|bright_green|yellow|gold|pink|
+				grey_40_percent|violet|light_blue|aqua|sea_green|lime|light_orange|red|grey_50_percent|
+				blue_grey|blue|teal|green|dark_yellow|orange|dark_red|grey_80_percent|indigo|dark_blue|
+				dark_teal|dark_green|olive_green|brown|black) "white"
+	fontFamily (宋体|隶书|黑体|Arial|Century) "宋体"
+	fontStyle (normal|bold|italic|underline|strike|sup|sub|
+				bolditalic|boldunderline|boldstrike|italicsup) "normal"
+	fontSize CDATA "10"
+	fontColor (automatic|light_cornflower_blue|royal_blue|coral|orchid|maroon|lemon_chiffon|
+				cornflower_blue|white|lavender|pale_blue|light_turquoise|light_green|light_yellow|
+				tan|rose|grey_25_percent|plum|sky_blue|turquoise|bright_green|yellow|gold|pink|
+				grey_40_percent|violet|light_blue|aqua|sea_green|lime|light_orange|red|grey_50_percent|
+				blue_grey|blue|teal|green|dark_yellow|orange|dark_red|grey_80_percent|indigo|dark_blue|
+				dark_teal|dark_green|olive_green|brown|black) "black"
+	width CDATA "595"
+	height CDATA "842"
+	ending CDATA "..."
+	blank CDATA "-"
+	margin CDATA "20"
+	marginLeft CDATA #IMPLIED
+	marginRight CDATA #IMPLIED
+	marginTop CDATA #IMPLIED
+	marginBottom CDATA #IMPLIED
+			
+	beginRow CDATA "0"
+	beginCol CDATA "0"
+	cols CDATA '0'
+	pageType (a0|a1|a2|a3|a4|a5|a6|a7|a8|a9|a10|
+				b0|b1|b2|b3|b4|b5|b6|b7|b8|b9|b10|
+				arch_a|arch_b|arch_c|arch_d) "a4">
+<!ELEMENT image EMPTY>
+<!ATTLIST image
+	beginx CDATA "0"
+	beginy CDATA "0"
+	endx CDATA #IMPLIED
+	endy CDATA #IMPLIED
+	transparence CDATA "50"
+	transparenceLeft CDATA "50"
+	transparenceRight CDATA "50"
+	width CDATA "100"
+	height CDATA "100"
+	src CDATA #IMPLIED>
+<!ELEMENT table (tr+)>
+<!--table属性
+	sourceType (normal|subtr) "normal"
+	sourceTrIndex CDATA  #IMPLIED
+-->
+<!ATTLIST table 
+	align (general|left|center|right|fill|justify|center_selection) #IMPLIED
+	vAlign (top|middle|bottom|vjustify) #IMPLIED
+	border (true|false) #IMPLIED
+	borderType (none|thin|medium|dashed|hair|thick|double|dotted|medium_dashed|dash_dot|
+				medium_dash_dot|dash_dot_dot|medium_dash_dot_dot|slanted_dash_dot) #IMPLIED
+	borderWeight CDATA #IMPLIED
+	borderColor (automatic|light_cornflower_blue|royal_blue|coral|orchid|maroon|lemon_chiffon|
+				cornflower_blue|white|lavender|pale_blue|light_turquoise|light_green|light_yellow|
+				tan|rose|grey_25_percent|plum|sky_blue|turquoise|bright_green|yellow|gold|pink|
+				grey_40_percent|violet|light_blue|aqua|sea_green|lime|light_orange|red|grey_50_percent|
+				blue_grey|blue|teal|green|dark_yellow|orange|dark_red|grey_80_percent|indigo|dark_blue|
+				dark_teal|dark_green|olive_green|brown|black) #IMPLIED
+	borderLeft (true|false) #IMPLIED
+	borderRight (true|false) #IMPLIED
+	borderTop (true|false) #IMPLIED
+	borderBottom (true|false) #IMPLIED
+	blackColor (automatic|light_cornflower_blue|royal_blue|coral|orchid|maroon|lemon_chiffon|
+				cornflower_blue|white|lavender|pale_blue|light_turquoise|light_green|light_yellow|
+				tan|rose|grey_25_percent|plum|sky_blue|turquoise|bright_green|yellow|gold|pink|
+				grey_40_percent|violet|light_blue|aqua|sea_green|lime|light_orange|red|grey_50_percent|
+				blue_grey|blue|teal|green|dark_yellow|orange|dark_red|grey_80_percent|indigo|dark_blue|
+				dark_teal|dark_green|olive_green|brown|black) #IMPLIED
+	fontFamily (宋体|隶书|黑体|Arial|Century) #IMPLIED
+	fontStyle (normal|bold|italic|underline|strike|sup|sub|
+				bolditalic|boldunderline|boldstrike|italicsup) #IMPLIED
+	fontSize CDATA #IMPLIED
+	fontColor (automatic|light_cornflower_blue|royal_blue|coral|orchid|maroon|lemon_chiffon|
+				cornflower_blue|white|lavender|pale_blue|light_turquoise|light_green|light_yellow|
+				tan|rose|grey_25_percent|plum|sky_blue|turquoise|bright_green|yellow|gold|pink|
+				grey_40_percent|violet|light_blue|aqua|sea_green|lime|light_orange|red|grey_50_percent|
+				blue_grey|blue|teal|green|dark_yellow|orange|dark_red|grey_80_percent|indigo|dark_blue|
+				dark_teal|dark_green|olive_green|brown|black) #IMPLIED
+	width CDATA #IMPLIED
+	height CDATA #IMPLIED
+	ending CDATA #IMPLIED
+	blank CDATA #IMPLIED
+	margin CDATA #IMPLIED
+	marginLeft CDATA #IMPLIED
+	marginRight CDATA #IMPLIED
+	marginTop CDATA #IMPLIED
+	marginBottom CDATA #IMPLIED
+	
+	fill CDATA "100">
+<!ELEMENT tr (td+)>
+<!-- source：params:xml中配置的值
+			parent：父tr中配置的source
+			sources，配置的根数据源
+			其他字符：从父source迭代出来的数据集合
+-->
+<!ATTLIST tr 
+	align (general|left|center|right|fill|justify|center_selection) #IMPLIED
+	vAlign (top|middle|bottom|vjustify) #IMPLIED
+	border (true|false) #IMPLIED
+	borderType (none|thin|medium|dashed|hair|thick|double|dotted|medium_dashed|dash_dot|
+				medium_dash_dot|dash_dot_dot|medium_dash_dot_dot|slanted_dash_dot) #IMPLIED
+	borderWeight CDATA #IMPLIED
+	borderColor (automatic|light_cornflower_blue|royal_blue|coral|orchid|maroon|lemon_chiffon|
+				cornflower_blue|white|lavender|pale_blue|light_turquoise|light_green|light_yellow|
+				tan|rose|grey_25_percent|plum|sky_blue|turquoise|bright_green|yellow|gold|pink|
+				grey_40_percent|violet|light_blue|aqua|sea_green|lime|light_orange|red|grey_50_percent|
+				blue_grey|blue|teal|green|dark_yellow|orange|dark_red|grey_80_percent|indigo|dark_blue|
+				dark_teal|dark_green|olive_green|brown|black) #IMPLIED
+	borderLeft (true|false) #IMPLIED
+	borderRight (true|false) #IMPLIED
+	borderTop (true|false) #IMPLIED
+	borderBottom (true|false) #IMPLIED
+	blackColor (automatic|light_cornflower_blue|royal_blue|coral|orchid|maroon|lemon_chiffon|
+				cornflower_blue|white|lavender|pale_blue|light_turquoise|light_green|light_yellow|
+				tan|rose|grey_25_percent|plum|sky_blue|turquoise|bright_green|yellow|gold|pink|
+				grey_40_percent|violet|light_blue|aqua|sea_green|lime|light_orange|red|grey_50_percent|
+				blue_grey|blue|teal|green|dark_yellow|orange|dark_red|grey_80_percent|indigo|dark_blue|
+				dark_teal|dark_green|olive_green|brown|black) #IMPLIED
+	complement (true|false) "true"
+	fontFamily (宋体|隶书|黑体|Arial|Century) #IMPLIED
+	fontStyle (normal|bold|italic|underline|strike|sup|sub|
+				bolditalic|boldunderline|boldstrike|italicsup) #IMPLIED
+	fontSize CDATA #IMPLIED
+	fontColor (automatic|light_cornflower_blue|royal_blue|coral|orchid|maroon|lemon_chiffon|
+				cornflower_blue|white|lavender|pale_blue|light_turquoise|light_green|light_yellow|
+				tan|rose|grey_25_percent|plum|sky_blue|turquoise|bright_green|yellow|gold|pink|
+				grey_40_percent|violet|light_blue|aqua|sea_green|lime|light_orange|red|grey_50_percent|
+				blue_grey|blue|teal|green|dark_yellow|orange|dark_red|grey_80_percent|indigo|dark_blue|
+				dark_teal|dark_green|olive_green|brown|black) #IMPLIED
+	width CDATA #IMPLIED
+	height CDATA #IMPLIED
+	ending CDATA #IMPLIED
+	blank CDATA #IMPLIED
+	margin CDATA #IMPLIED
+	marginLeft CDATA #IMPLIED
+	marginRight CDATA #IMPLIED
+	marginTop CDATA #IMPLIED
+	marginBottom CDATA #IMPLIED
+	source CDATA "parent">
+<!ELEMENT td (#PCDATA|table|img|labels|label)*>
+<!--        td属性           -->
+<!ATTLIST td 
+	align (general|left|center|right|fill|justify|center_selection) #IMPLIED
+	vAlign (top|middle|bottom|vjustify) #IMPLIED
+	border (true|false) #IMPLIED
+	borderType (none|thin|medium|dashed|hair|thick|double|dotted|medium_dashed|dash_dot|
+				medium_dash_dot|dash_dot_dot|medium_dash_dot_dot|slanted_dash_dot) #IMPLIED
+	borderWeight CDATA #IMPLIED
+	borderColor (automatic|light_cornflower_blue|royal_blue|coral|orchid|maroon|lemon_chiffon|
+				cornflower_blue|white|lavender|pale_blue|light_turquoise|light_green|light_yellow|
+				tan|rose|grey_25_percent|plum|sky_blue|turquoise|bright_green|yellow|gold|pink|
+				grey_40_percent|violet|light_blue|aqua|sea_green|lime|light_orange|red|grey_50_percent|
+				blue_grey|blue|teal|green|dark_yellow|orange|dark_red|grey_80_percent|indigo|dark_blue|
+				dark_teal|dark_green|olive_green|brown|black) #IMPLIED
+	borderLeft (true|false) #IMPLIED
+	borderRight (true|false) #IMPLIED
+	borderTop (true|false) #IMPLIED
+	borderBottom (true|false) #IMPLIED
+	blackColor (automatic|light_cornflower_blue|royal_blue|coral|orchid|maroon|lemon_chiffon|
+				cornflower_blue|white|lavender|pale_blue|light_turquoise|light_green|light_yellow|
+				tan|rose|grey_25_percent|plum|sky_blue|turquoise|bright_green|yellow|gold|pink|
+				grey_40_percent|violet|light_blue|aqua|sea_green|lime|light_orange|red|grey_50_percent|
+				blue_grey|blue|teal|green|dark_yellow|orange|dark_red|grey_80_percent|indigo|dark_blue|
+				dark_teal|dark_green|olive_green|brown|black) #IMPLIED
+	fontFamily (宋体|隶书|黑体|Arial|Century) #IMPLIED
+	fontStyle (normal|bold|italic|underline|strike|sup|sub|
+				bolditalic|boldunderline|boldstrike|italicsup) #IMPLIED
+	fontSize CDATA #IMPLIED
+	fontColor (automatic|light_cornflower_blue|royal_blue|coral|orchid|maroon|lemon_chiffon|
+				cornflower_blue|white|lavender|pale_blue|light_turquoise|light_green|light_yellow|
+				tan|rose|grey_25_percent|plum|sky_blue|turquoise|bright_green|yellow|gold|pink|
+				grey_40_percent|violet|light_blue|aqua|sea_green|lime|light_orange|red|grey_50_percent|
+				blue_grey|blue|teal|green|dark_yellow|orange|dark_red|grey_80_percent|indigo|dark_blue|
+				dark_teal|dark_green|olive_green|brown|black) #IMPLIED
+	ending CDATA #IMPLIED
+	blank CDATA #IMPLIED
+	margin CDATA #IMPLIED
+	marginLeft CDATA #IMPLIED
+	marginRight CDATA #IMPLIED
+	marginTop CDATA #IMPLIED
+	marginBottom CDATA #IMPLIED
+	width CDATA "8"
+	height CDATA "20"
+	
+	venusIp (true|false) "false"
+	combine (true|false) "false"
+	begin CDATA #IMPLIED
+	length CDATA #IMPLIED
+	colSpan CDATA "1"
+	rowSpan CDATA "1"
+	field CDATA #IMPLIED>
+<!ELEMENT img (#PCDATA)>
+<!ATTLIST img 
+	width CDATA "100"
+	height CDATA "100"
+	src CDATA #REQUIRED>
+<!ELEMENT labels (label)*>
+<!ATTLIST labels
+	sourceType (sources|parent) "sources"
+	source CDATA #REQUIRED
+	label CDATA #REQUIRED
+	value CDATA #REQUIRED>
+<!ELEMENT label (#PCDATA)>
+<!ATTLIST label
+	value CDATA #REQUIRED>
