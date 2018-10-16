@@ -26,7 +26,7 @@ public class Util {
   private static final Logger logger = Logger.getLogger(Util.class);
 
   private static final ThreadLocal<SimpleDateFormat> simpleDateFormatThreadLocal =
-      new ThreadLocal<SimpleDateFormat>();
+          new ThreadLocal<SimpleDateFormat>();
 
   public static final char SYMBOL_UNDERLINE = '_';
   public static final char SYMBOL_POINT = '.';
@@ -35,9 +35,9 @@ public class Util {
 
   /**
    * <pre>
-   * 1秒=1000毫秒(ms), 1毫秒=1／1000秒(s)； 
-   * 1秒=1000000 微秒(μs), 1微秒=1／1000000秒(s)； 
-   * 1秒=1000000000 纳秒(ns),1纳秒=1／1000000000秒(s)； 
+   * 1秒=1000毫秒(ms), 1毫秒=1／1000秒(s)；
+   * 1秒=1000000 微秒(μs), 1微秒=1／1000000秒(s)；
+   * 1秒=1000000000 纳秒(ns),1纳秒=1／1000000000秒(s)；
    * 1秒=1000000000000皮秒 1皮秒==1/1000000000000秒。
    * </pre>
    */
@@ -45,7 +45,7 @@ public class Util {
 
   /**
    * 纳秒转毫秒
-   * 
+   *
    * @return
    */
   public static final long timeNano2Mili(long nanoSeconds) {
@@ -54,7 +54,7 @@ public class Util {
 
   /**
    * 毫秒转纳秒
-   * 
+   *
    * @param miliSeconds
    * @return
    */
@@ -66,7 +66,7 @@ public class Util {
    * <pre>
    * 验证某个字符串是否为null或空字符串
    * </pre>
-   * 
+   *
    * @param str
    * @return
    */
@@ -106,7 +106,7 @@ public class Util {
    * 将已分隔符分割的字符串转换为java风格并映射到map集合中
    * 键为分割的每一个原始字符 值为转换后的字符
    * </pre>
-   * 
+   *
    * @param str
    * @param delimiter
    * @return {column:property}
@@ -127,7 +127,7 @@ public class Util {
    * 判断某个数字num的二进制表示的第place位是否为1；
    * 位置从0开始
    * </pre>
-   * 
+   *
    * @param num
    * @param place
    * @return
@@ -142,7 +142,7 @@ public class Util {
    * 格式化日期
    * 形如：yyyy-MM-dd hh:mm:ss
    * </pre>
-   * 
+   *
    * @param calendar
    * @return
    */
@@ -172,7 +172,7 @@ public class Util {
 
   /**
    * 字符串首字母大写
-   * 
+   *
    * @param str
    * @return
    */
@@ -182,7 +182,7 @@ public class Util {
 
   /**
    * 字符串首字母小写
-   * 
+   *
    * @param str
    * @return
    */
@@ -193,7 +193,7 @@ public class Util {
 
   /**
    * 根据文件路径获取文件内容
-   * 
+   *
    * @param filePath
    */
   public static String getFileContent(String filePath, String charset) {
@@ -201,7 +201,7 @@ public class Util {
     String str;
     try {
       BufferedReader br =
-          new BufferedReader(new InputStreamReader(new FileInputStream(filePath), charset));
+              new BufferedReader(new InputStreamReader(new FileInputStream(filePath), charset));
       while ((str = br.readLine()) != null) {
         sb.append(str);
       }
@@ -214,8 +214,8 @@ public class Util {
 
   /**
    * 将一个浮点数转换为百分比 末位四舍五入
-   * 
-   * @param val 要转换的值
+   *
+   * @param val     要转换的值
    * @param decimal 保留的小树位数 不能超过10位
    * @return
    */
@@ -230,13 +230,13 @@ public class Util {
     }
     int[] prefix = new int[decimal - remain.length()];
     return result + IConstant.p_dot_
-        + Arrays.toString(prefix).replace(", ", "").substring(1).replace("]", "") + remain
-        + IConstant.p_per_;
+            + Arrays.toString(prefix).replace(", ", "").substring(1).replace("]", "") + remain
+            + IConstant.p_per_;
   }
 
   /**
    * 将一个浮点数转换为百分比 保留两位小数点 末位四舍五入
-   * 
+   *
    * @param val
    * @return
    */
@@ -246,7 +246,7 @@ public class Util {
 
   /**
    * 将list集合中的字符转换为字符串，格式用逗号，隔开
-   * 
+   *
    * @param blank 集合为空时返回的字符
    */
   public static String toString(Collection<String> list, String blank) {
@@ -263,8 +263,8 @@ public class Util {
 
   /**
    * 方法用于获取一个连接的内容
-   * 
-   * @param url 连接地址
+   *
+   * @param url     连接地址
    * @param charset 字符集,为null时默认为gb2312
    */
   public static String getUrlContent(String url, String charset) {
@@ -276,7 +276,7 @@ public class Util {
     try {
       url_ = new URL(url);
       br = new BufferedReader(
-          new InputStreamReader(url_.openConnection().getInputStream(), charset));
+              new InputStreamReader(url_.openConnection().getInputStream(), charset));
       sb = new StringBuilder(256);
       String str = null;
       while ((str = br.readLine()) != null) {
@@ -297,7 +297,7 @@ public class Util {
 
   /**
    * 转换为字符串列表并用指定的符合分隔
-   * 
+   *
    * @param arr
    * @param delimiter
    * @return
@@ -318,7 +318,7 @@ public class Util {
     String sIp = "0.0.0.0";
     if (!(ip > 4294967295l || ip < 0)) {
       sIp = (ip >>> 24 & 0xff) + IConstant.p_dot_ + (ip >>> 16 & 0xff) + IConstant.p_dot_
-          + (ip >>> 8 & 0xff) + IConstant.p_dot_ + (ip & 0xFf);
+              + (ip >>> 8 & 0xff) + IConstant.p_dot_ + (ip & 0xFf);
     }
     return sIp;
   }
@@ -341,7 +341,7 @@ public class Util {
    * <pre>
    * 是否为基础类型或charsequence
    * </pre>
-   * 
+   *
    * @param params
    * @return
    */
@@ -354,7 +354,7 @@ public class Util {
    * <pre>
    * 将一个map转换为不区分大小写的map
    * </pre>
-   * 
+   *
    * @param map
    * @return
    */
@@ -378,7 +378,7 @@ public class Util {
    * @return {column:property}
    */
   public static final Map<String, String> mapperJavaStyleToCaseInsensitiveMap(String str,
-      String delimiter) {
+                                                                              String delimiter) {
     CaseInsensitiveMap<String, String> map = new CaseInsensitiveMap<>();
     if (!isBlank(str)) {
       String[] strings = str.split(delimiter);
@@ -394,16 +394,21 @@ public class Util {
    * 判定一个字符串的开头是否为指定字符串
    * 不区分大小写
    * </pre>
-   * 
+   *
    * @param src
-   * @param dest
+   * @param dests
    * @return
    */
-  public static final boolean startsIgnoreCase(String src, String dest) {
-    if (src.length() < dest.length()) {
-      return false;
+  public static final boolean startsIgnoreCase(String src, String... dests) {
+    for (String dest : dests) {
+      if (src.length() < dest.length()) {
+        return false;
+      }
+      if (src.substring(0, dest.length()).equalsIgnoreCase(dest)) {
+        return true;
+      }
     }
-    return src.substring(0, dest.length()).equalsIgnoreCase(dest);
+    return false;
   }
 
   /**
@@ -411,7 +416,7 @@ public class Util {
    * 判定一个字符串的结尾是否为指定字符串
    * 不区分大小写
    * </pre>
-   * 
+   *
    * @param src
    * @param dest
    * @return
@@ -428,7 +433,7 @@ public class Util {
    * 判定一个字符串是否等于指定的任何一个字符串
    * 不区分大小写
    * </pre>
-   * 
+   *
    * @param src
    * @param dest
    * @return
